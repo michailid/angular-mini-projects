@@ -1,3 +1,5 @@
+This project is based on the tutorial _Build 10 Mini Projects with Angular 21 | Master in Angular 21_: https://www.youtube.com/watch?v=McTvhcNxasE&t=4982s
+
 # 10MiniProjects
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.13.
