@@ -4,7 +4,12 @@
     <p class="mt-8 text-lg">{{ questions[currentQuestionIndex].question }}</p>
     @for (option of questions[currentQuestionIndex].options; track $index) {
       <div
-        class="w-80 border rounded-lg my-2 p-2 text-center hover:bg-gray-100"
+        class="w-80 border rounded-lg my-2 p-2 text-center"
+        [ngClass]="
+          selectedOptionIndex == $index
+            ? 'bg-gray-400 hover:bg-gray-400'
+            : 'bg-white hover:bg-gray-100'
+        "
         (click)="onSelectOption($index)"
       >
         {{ option }}
