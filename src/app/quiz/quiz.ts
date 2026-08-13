@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Question } from '../model/quiz.model';
-import { NgClass } from '../../../node_modules/@angular/common/types/_common_module-chunk';
 
 @Component({
   selector: 'app-quiz',
-  imports: [NgClass],
+  imports: [],
   templateUrl: './quiz.html',
   styleUrl: './quiz.css',
 })
@@ -25,14 +24,25 @@ export class Quiz {
   currentQuestionIndex: number = 0;
   endOfQuiz = false;
   score = 0;
+  selectedOptionIndex: number | null = null;
 
+  /**
+   *
+   * @param index the index of the the selected option
+   */
   onSelectOption(index: number) {
-    if (index == this.questions[this.currentQuestionIndex].correctAnswerIndex) {
+    this.selectedOptionIndex = index;
+  }
+
+  computeScore() {
+    if (this.selectedOptionIndex == this.questions[this.currentQuestionIndex].correctAnswerIndex) {
       this.score += 1;
     }
   }
 
   goToNextQuestion() {
+    this.computeScore();
+    this.selectedOptionIndex = null;
     if (this.currentQuestionIndex == this.questions.length - 1) {
       this.endOfQuiz = true;
     } else {
@@ -45,8 +55,4 @@ export class Quiz {
     this.endOfQuiz = false;
     this.score = 0;
   }
-
-  // isOptionSelected(optionIndex: number) {
-  //   if (this.questions[this.currentQuestionIndex].options[optionIndex])
-  // }
 }
