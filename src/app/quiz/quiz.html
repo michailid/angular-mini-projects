@@ -1,0 +1,35 @@
+<div class="flex justify-center mt-10">
+  <div class="p-8 rounded-2xl w-96 shadow-xl/20">
+    <h1 class="font-bold text-xl">Question {{ currentQuestionIndex + 1 }}</h1>
+    <p class="mt-8 text-lg">{{ questions[currentQuestionIndex].question }}</p>
+    @for (option of questions[currentQuestionIndex].options; track $index) {
+      <div
+        class="w-80 border rounded-lg my-2 p-2 text-center hover:bg-gray-100"
+        (click)="onSelectOption($index)"
+      >
+        {{ option }}
+      </div>
+    }
+    @if (!endOfQuiz) {
+      <div class="flex justify-end">
+        <button
+          class="bg-blue-500 text-white text-lg w-30 p-2 my-4 rounded-lg hover:bg-blue-600"
+          (click)="goToNextQuestion()"
+        >
+          Next >
+        </button>
+      </div>
+    }
+    @if (endOfQuiz) {
+      <div class="flex flex-col items-center">
+        <h2 class="font-bold text-2xl my-3">Score: {{ score }}/{{ questions.length }}</h2>
+        <button
+          class="bg-blue-500 text-white text-lg w-30 p-2 m-1 rounded-lg hover:bg-blue-600"
+          (click)="restart()"
+        >
+          Restart
+        </button>
+      </div>
+    }
+  </div>
+</div>

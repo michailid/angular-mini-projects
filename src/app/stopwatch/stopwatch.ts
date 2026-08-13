@@ -11,7 +11,9 @@ export class Stopwatch {
   interval: any;
 
   start() {
-    clearInterval(this.interval);
+    clearInterval(this.interval
+      
+    );
     this.interval = setInterval(() => {
       this.time.update((v) => v + 1);
     }, 1000);
