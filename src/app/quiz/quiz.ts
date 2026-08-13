@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Question } from '../model/quiz.model';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-quiz',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './quiz.html',
   styleUrl: './quiz.css',
 })
