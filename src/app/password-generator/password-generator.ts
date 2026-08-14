@@ -8,19 +8,17 @@ import { Component, signal } from '@angular/core';
 })
 export class PasswordGenerator {
   password = signal('');
+  readonly CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~!@#$%^&*-_?<>';
 
   generatePassword() {
-    this.password.set('');
+    let pwd = '';
     for (let i = 0; i < 12; i++) {
-      const c = this.getRandomChar();
-      this.password.update((p) => p + c);
+      pwd += this.getRandomChar();
     }
+    this.password.set(pwd);
   }
 
   getRandomChar(): string {
-    const min = 33;
-    const max = 126;
-    const asciiCode = Math.floor(Math.random() * (max - min + 1)) + min;
-    return String.fromCharCode(asciiCode);
+    return this.CHARS[Math.floor(Math.random() * this.CHARS.length)];
   }
 }
