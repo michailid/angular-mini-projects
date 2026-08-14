@@ -13,12 +13,12 @@ export class Quiz {
     {
       question: 'Tailwind is?',
       options: ['Framework', 'Library', 'Utility CSS'],
-      correctAnswerIndex: 0,
+      correctAnswerIndex: 2,
     },
     {
       question: 'What is int in Java?',
-      options: ['Boolean', 'Float', 'Integer'],
-      correctAnswerIndex: 2,
+      options: ['Integer', 'Float', 'Boolean'],
+      correctAnswerIndex: 0,
     },
   ];
 
