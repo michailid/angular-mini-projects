@@ -1,5 +1,5 @@
 <div class="max-w-md mx-auto mt-10 h-64 overflow-y-auto p-1 border">
-  @for (message of messages; track $index) {
+  @for (message of messages(); track message) {
     <div class="bg-gray-200 p-2 rounded m-1 break-all">{{ message }}</div>
   }
 </div>
@@ -9,7 +9,7 @@
     type="text"
     class="border my-3 w-full p-2 focus:outline-none"
     placeholder="Write your message here..."
-    [(ngModel)]="currentMessage"
-    (keyup.enter)="sendMessage()"
+    #input
+    (keyup.enter)="sendMessage(input.value); input.value = ''"
   />
 </div>
