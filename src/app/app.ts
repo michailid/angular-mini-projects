@@ -1,11 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Quiz } from './quiz/quiz';
-import { QuizV2 } from './quiz-v2/quiz-v2';
+import { PasswordGenerator } from './password-generator/password-generator';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, QuizV2],
+  imports: [RouterOutlet, PasswordGenerator],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
