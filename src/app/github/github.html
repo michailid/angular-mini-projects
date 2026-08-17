@@ -1,0 +1,38 @@
+<div class="bg-linear-to-br from-gray-900 to-gray-800 h-screen flex items-center justify-center">
+  <div class="w-120 h-fit p-4 bg-gray-800 rounded-2xl shadow-lg">
+    <h1 class="text-center text-white font-bold text-3xl mt-5">GitHub User Search</h1>
+    <input
+      type="text"
+      class="bg-gray-700 text-white text-lg p-2 rounded w-85 h-10 my-5 focus:outline-none"
+      placeholder="Enter username..."
+      (input)="query.set($any($event.target).value)"
+    />
+    <button
+      class="bg-blue-500 text-white w-24 h-10 ml-2 rounded text-lg hover:bg-blue-600"
+      (click)="searchUser()"
+    >
+      Search
+    </button>
+    @if (loading()) {
+      <p class="text-gray-500 text-center">Loading...</p>
+    }
+    @if (error()) {
+      <p class="text-red-400 text-center">{{ error() }}</p>
+    }
+    @if (user()) {
+      <div
+        (click)="openProfile()"
+        class="bg-gray-700 transition-all duration-200 ease-out hover:scale-102 hover:shadow-xl rounded-2xl h-60 mb-3 mt-0 flex flex-col items-center cursor-pointer"
+      >
+        <img
+          [src]="user().avatar_url"
+          alt="User avatar"
+          class="size-25 rounded-full bg-green-700 border-white border-2 m-3 mb-4"
+        />
+        <p class="text-center text-lg text-white font-bold">{{ user().login || user().name }}</p>
+        <p class="text-center text-gray-400">{{ user().bio || 'No bio available' }}</p>
+        <p class="text-center text-gray-500 mt-2">Click to view profile -></p>
+      </div>
+    }
+  </div>
+</div>
