@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Github } from './github/github';
+import { VotingApp } from './voting-app/voting-app';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Github],
+  imports: [RouterOutlet, VotingApp],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
