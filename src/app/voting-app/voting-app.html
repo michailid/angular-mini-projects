@@ -3,36 +3,39 @@
   <div class="flex gap-2 my-3">
     <input
       type="text"
-      class="border rounded flex-1 text-lg p-2 focus:outline-none"
+      class="border-2 rounded flex-1 text-lg p-2 focus:outline-none"
       placeholder="Add option.."
-      #input
+      [(ngModel)]="newOption"
     />
 
     <button
       class="bg-black rounded text-white text-lg px-4 py-1 hover:bg-gray-800"
-      (click)="addOption(input.value); input.value = ''"
+      (click)="addOption()"
     >
       Add
     </button>
   </div>
 
-  @for (option of options(); track $index) {
+  @for (option of store.options(); track option.id) {
     <div class="bg-gray-200 mb-2 rounded h-fit p-2">
       <div class="flex">
-        <p class="w-8/10 text-lg">{{ option.option }}</p>
+        <p class="w-8/10 text-lg">{{ option.text }}</p>
         <p class="w-2/10 text-lg text-end">{{ option.votes }} votes</p>
       </div>
       <button
         class="bg-blue-500 text-white rounded px-3 py-1 mt-3 hover:bg-blue-600"
-        (click)="upVote($index)"
+        (click)="store.vote(option.id)"
       >
         Vote
       </button>
       <div class="bg-gray-300 rounded-full h-2 mt-2">
-        <div class="bg-green-500 rounded-full h-2 mt-2 w-2/10"></div>
+        <div
+          class="bg-green-500 rounded-full h-2 mt-2"
+          [style.width.%]="getPercentage(option.votes)"
+        ></div>
       </div>
     </div>
   }
 
-  <p class="font-bold text-lg mt-3">Total Votes: 10</p>
+  <p class="font-bold text-lg mt-3">Total Votes: {{ store.totalVotes() }}</p>
 </div>

@@ -1,20 +1,27 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Option } from '../model/voting.model';
+import { PollStore } from '../stores/poll.store';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-voting-app',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './voting-app.html',
   styleUrl: './voting-app.css',
 })
 export class VotingApp {
-  options = signal<Option[]>([]);
+  newOption = '';
 
-  addOption(option: string) {
-    if (option == '') return;
-    this.options.update((list) => [...list, { option: option, votes: 0 }]);
-    console.log(this.options());
+  store = inject(PollStore);
+
+  addOption() {
+    if (!this.newOption.trim()) return;
+    this.store.addOption(this.newOption);
+    this.newOption = '';
   }
 
-  upVote(index: number) {}
+  getPercentage(votes: number) {
+    const total = this.store.totalVotes();
+    return total ? (votes / total) * 100 : 0;
+  }
 }
