@@ -20,10 +20,12 @@
       Add
     </button>
   </div>
-  @for (note of filteredNotes(); track note; let i = $index) {
+  @for (note of filteredNotes(); track note) {
     <div class="bg-gray-100 h-fit rounded-lg mt-2 p-2 flex justify-between">
-      <p>{{ note }}</p>
-      <span class="mx-1 text-red-500 cursor-pointer hover:text-red-700" (click)="deleteNote(i)"
+      <p>{{ note.text }}</p>
+      <span
+        class="mx-1 text-red-500 cursor-pointer hover:text-red-700"
+        (click)="deleteNote(note.id)"
         >✕</span
       >
     </div>
