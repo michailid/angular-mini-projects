@@ -1,0 +1,31 @@
+<div class="shadow-lg rounded-xl p-4 w-130 mt-20 mx-auto">
+  <h1 class="text-center font-bold text-3xl">Notes App</h1>
+  <input
+    type="text"
+    class="border p-2 w-full mt-4 rounded outline-none"
+    placeholder="🔎 Search notes..."
+    (input)="search.set($any($event.target).value)"
+  />
+  <div class="flex justify-between gap-2 mt-3 mb-4">
+    <input
+      type="text"
+      class="border rounded p-2 w-full outline-none"
+      #noteInput
+      placeholder="Add note..."
+    />
+    <button
+      class="bg-blue-500 text-white px-4 py-0 rounded hover:bg-blue-600"
+      (click)="addNote(noteInput.value); noteInput.value = ''"
+    >
+      Add
+    </button>
+  </div>
+  @for (note of filteredNotes(); track note; let i = $index) {
+    <div class="bg-gray-100 h-fit rounded-lg mt-2 p-2 flex justify-between">
+      <p>{{ note }}</p>
+      <span class="mx-1 text-red-500 cursor-pointer hover:text-red-700" (click)="deleteNote(i)"
+        >✕</span
+      >
+    </div>
+  }
+</div>

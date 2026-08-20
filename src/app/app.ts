@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { VotingApp } from './voting-app/voting-app';
+import { Notes } from './notes/notes';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, VotingApp],
+  imports: [RouterOutlet, Notes],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

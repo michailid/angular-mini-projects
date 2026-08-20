@@ -1,5 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { Option } from '../model/voting.model';
 import { PollStore } from '../stores/poll.store';
 import { FormsModule } from '@angular/forms';
 
