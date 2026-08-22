@@ -32,6 +32,11 @@ export class CartSystem {
       name: 'Watch',
       price: 30,
     },
+    {
+      id: 4,
+      name: 'A product with a very long name, a product with a very long name, a product with a very long name, a product with a very long name, a product with a very long name',
+      price: 30,
+    },
   ]);
 
   cart = signal<Product[]>(this.loadData());

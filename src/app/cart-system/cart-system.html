@@ -1,12 +1,12 @@
 <h1 class="text-2xl text-center mt-20">Cart: {{ cart().length }}</h1>
 
-<div class="flex justify-center gap-2">
-  <div class="h-fit w-100">
+<div class="grid md:grid-cols-2 p-4 gap-6">
+  <div class="h-fit w-full">
     <h2 class="font-bold bg-blue-200 my-2 text-lg">Products</h2>
     @for (product of products(); track product) {
-      <div class="flex gap-2 p-2 my-1 w-full h-fit border rounded border-gray-200">
+      <div class="flex gap-2 p-2 my-1 w-full h-fit shadow rounded">
         <div class="p-2 w-full">
-          <p>{{ product.name }}</p>
+          <p class="font-semibold h-fit">{{ product.name }}</p>
           <p>{{ product.price }} €</p>
         </div>
         <button
@@ -18,7 +18,7 @@
       </div>
     }
   </div>
-  <div class="h-fit w-100">
+  <div class="h-fit w-full">
     <h2 class="font-bold bg-blue-200 my-2 text-lg">Cart</h2>
     @for (product of cart(); track $index) {
       <div class="flex bg-gray-300 rounded p-2 my-1">
