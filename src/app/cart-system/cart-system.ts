@@ -1,6 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { Product } from '../model/cart.model';
-import { LocalizedString } from '@angular/compiler';
 
 @Component({
   selector: 'app-cart-system',
@@ -10,6 +9,12 @@ import { LocalizedString } from '@angular/compiler';
 })
 export class CartSystem {
   private readonly STORAGE_KEY = 'cart';
+
+  constructor() {
+    effect(() => {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.cart()));
+    });
+  }
 
   products = signal<Product[]>([
     {
@@ -29,7 +34,7 @@ export class CartSystem {
     },
   ]);
 
-  cart = signal<Product[]>([]);
+  cart = signal<Product[]>(this.loadData());
 
   addToCart(product: Product) {
     this.cart.update((list) => [...list, product]);
@@ -41,5 +46,11 @@ export class CartSystem {
 
   totalPrice() {
     return this.cart().reduce((total, product) => total + product.price, 0);
+  }
+
+  loadData() {
+    if (typeof window == 'undefined') return [];
+    const data = localStorage.getItem(this.STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
   }
 }
