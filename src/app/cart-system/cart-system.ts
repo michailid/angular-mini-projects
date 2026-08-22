@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { Product } from '../model/cart.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Product } from '../model/cart.model';
   styleUrl: './cart-system.css',
 })
 export class CartSystem {
-  private readonly STORAGE_KEY = 'cart';
+  private readonly STORAGE_KEY = 'cart_data';
 
   constructor() {
     effect(() => {
@@ -39,7 +39,8 @@ export class CartSystem {
     },
   ]);
 
-  cart = signal<Product[]>(this.loadData());
+  cart = signal<Product[]>(this.loadCart());
+  totalPrice = computed(() => this.cart().reduce((total, product) => total + product.price, 0));
 
   addToCart(product: Product) {
     this.cart.update((list) => [...list, product]);
@@ -49,12 +50,8 @@ export class CartSystem {
     this.cart.update((list) => list.filter((_, i) => i !== index));
   }
 
-  totalPrice() {
-    return this.cart().reduce((total, product) => total + product.price, 0);
-  }
-
-  loadData() {
-    if (typeof window == 'undefined') return [];
+  loadCart() {
+    if (typeof localStorage === 'undefined') return [];
     const data = localStorage.getItem(this.STORAGE_KEY);
     return data ? JSON.parse(data) : [];
   }
