@@ -1,13 +1,19 @@
 <div class="flex justify-center items-center w-screen h-screen bg-gray-900">
   <div class="flex flex-col justify-around items-center bg-black p-4 w-40 h-85 rounded-3xl">
-    <div class="flex justify-center items-center rounded-full bg-gray-700 size-20">
-      <p class="text-white text-2xl">5</p>
-    </div>
-    <div class="flex justify-center items-center rounded-full bg-gray-700 size-20">
-      <p class="text-white text-2xl">3</p>
-    </div>
-    <div class="flex justify-center items-center rounded-full bg-gray-700 size-20">
-      <p class="text-white text-2xl">5</p>
-    </div>
+    @for (light of lights; track light.color) {
+      <div
+        class="flex text-2xl justify-center items-center rounded-full size-20 transition-all duration-500"
+        [class.bg-red-500]="currentLight() === 'red' && light.color === 'red'"
+        [class.bg-yellow-500]="currentLight() === 'yellow' && light.color === 'yellow'"
+        [class.bg-green-500]="currentLight() === 'green' && light.color === 'green'"
+        [class.bg-gray-700]="currentLight() !== light.color"
+        [class.text-white]="light.color !== 'yellow'"
+        [class.text-black]="light.color === 'yellow'"
+      >
+        @if (currentLight() === light.color) {
+          {{ timer() }}
+        }
+      </div>
+    }
   </div>
 </div>
