@@ -17,6 +17,7 @@ export class Traffic {
   currentLight = signal(this.lights[0].color);
   timer = signal(this.lights[0].duration);
   intervalId: any;
+  sequence = ['red', 'green', 'yellow'];
 
   constructor() {
     this.startTrafficLight();
@@ -26,10 +27,11 @@ export class Traffic {
     this.intervalId = setInterval(() => {
       this.timer.update((value) => value - 1);
       if (this.timer() === 0) {
-        const nextIndex = (this.currentIndex() + 1) % this.lights.length;
+        const nextIndex = (this.currentIndex() + 1) % this.sequence.length;
         this.currentIndex.set(nextIndex);
-        this.currentLight.set(this.lights[nextIndex].color);
-        this.timer.set(this.lights[nextIndex].duration);
+        this.currentLight.set(this.sequence[nextIndex]);
+        const lightIndex = this.lights.findIndex((light) => light.color === this.currentLight());
+        this.timer.set(this.lights[lightIndex].duration);
       }
     }, 1000);
   }
